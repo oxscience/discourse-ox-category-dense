@@ -1,7 +1,7 @@
-# OX Campus — Category Hybrid Layout
+# OX Campus — Category Dense Layout
 
 Discourse Theme Component fuer campus.outoftheb-ox.de.
-Gibt einzelnen Kategorien ein dichteres Listen-Layout mit Featured-Cards fuer Pinned Topics.
+Macht einzelne Kategorien dichter, damit mehr Content pro Screen passt.
 
 ---
 
@@ -10,10 +10,11 @@ Gibt einzelnen Kategorien ein dichteres Listen-Layout mit Featured-Cards fuer Pi
 Scoped nur auf Kategorien deren Slug in `common/common.scss` definiert ist (Default: `wissenschaft`). In allen anderen Kategorien bleibt alles wie gehabt.
 
 **Pro aktivierte Kategorie:**
-- Topic-Liste dichter (2–3x mehr Content pro Screen)
-- Pinned Topics bekommen Featured-Card-Look (Akzent-Border, "Featured"-Badge, Excerpt sichtbar)
-- Tag-Pills prominenter, Sekundaerinfos dezenter
-- Kategorie-Header leicht poliert
+- Topic-Zeilen kompakter — 2–3x mehr Topics pro Screen
+- Tag-Pills prominenter
+- Avatare kleiner (20px), Meta-Infos dezenter
+- Kategorie-Header minimal poliert
+- **Keine Paradigmen-Aenderung:** Tabellen-Layout bleibt, nur Luft rausgenommen
 
 **Sicherheitsnetz:**
 - Greift ausschliesslich ueber `body.category-{slug}` — keine globalen Selektoren
@@ -26,7 +27,7 @@ Scoped nur auf Kategorien deren Slug in `common/common.scss` definiert ist (Defa
 
 1. **Admin > Customize > Themes > Install**
 2. "From a git repository" waehlen
-3. URL: `https://github.com/oxscience/discourse-ox-category-hybrid`
+3. URL: `https://github.com/oxscience/discourse-ox-category-dense`
 4. Install druecken
 5. **Wichtig:** Als Component (nicht als Theme) installieren
 6. Unter "Included in these themes" das **OX Campus Theme** anhaken
@@ -64,13 +65,13 @@ Dann im Browser: Hard-Reload (Cmd+Shift+R) und pruefen ob CSS-Hash sich geaender
 In `common/common.scss` die Zeile
 
 ```scss
-$hybrid-scope: ".category-wissenschaft";
+$dense-scope: ".category-wissenschaft";
 ```
 
 erweitern, z.B.:
 
 ```scss
-$hybrid-scope: ".category-wissenschaft, .category-open-campus";
+$dense-scope: ".category-wissenschaft, .category-open-campus";
 ```
 
 Dann commit, push, Cache-Bust.
@@ -79,19 +80,11 @@ Dann commit, push, Cache-Bust.
 
 ## Rollback
 
-**Weich (Component aus):** Admin > Customize > Themes > OX Campus > Component "OX Campus — Category Hybrid Layout" Haken raus > Save. 3 Sekunden.
+**Weich (Component aus):** Admin > Customize > Themes > OX Campus > Component "OX Campus — Category Dense Layout" Haken raus > Save. 3 Sekunden.
 
 **Hart (Component weg):** Component loeschen im Admin. Das Haupt-Theme bleibt unberuehrt.
 
 **Notfall:** Das Haupt-Theme `discourse-eu-stack-theme` hat einen Backup-Tag `backup/pre-category-hybrid-2026-04-25` — falls dort je was schiefgehen sollte (was bei dieser Component nicht passieren kann, da sie separat ist).
-
----
-
-## Roadmap (wenn Phase 1 funktioniert)
-
-- [ ] Phase 2: Echter Card-Grid fuer Pinned Topics via Plugin-Outlet + kleines JS
-- [ ] Phase 3: Thumbnails aus erstem Bild im Topic
-- [ ] Phase 4: Tag-basierte Icon-Map (Evidenz, Training, Werder, ...)
 
 ---
 

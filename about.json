@@ -1,8 +1,8 @@
 {
-  "name": "OX Campus — Category Hybrid Layout",
+  "name": "OX Campus — Category Dense Layout",
   "component": true,
-  "about_url": "https://github.com/oxscience/discourse-ox-category-hybrid",
-  "license_url": "https://github.com/oxscience/discourse-ox-category-hybrid/blob/main/LICENSE",
+  "about_url": "https://github.com/oxscience/discourse-ox-category-dense",
+  "license_url": "https://github.com/oxscience/discourse-ox-category-dense/blob/main/LICENSE",
   "assets": {},
   "color_schemes": {}
 }
