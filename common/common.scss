@@ -1,0 +1,207 @@
+// =============================================================================
+// OX Campus — Category Hybrid Layout
+// -----------------------------------------------------------------------------
+// Scoped CSS: greift NUR in Kategorien deren Slug in $hybrid-categories steht.
+// Default: nur "wissenschaft". Weitere Slugs hier hinzufuegen.
+//
+// Ziel:
+//   - Dichte Topic-Liste (2–3x mehr Content pro Screen als Default)
+//   - Pinned Topics als Featured-Cards mit Akzent-Border
+//   - Tag-Pills prominenter, Sekundaerinfos leiser
+//   - Kategorie-Farbe als Akzent
+// =============================================================================
+
+// Scope: body.category-{slug} (Discourse setzt das automatisch).
+// Jede Regel laeuft unter diesem Praefix — keine Gefahr fuer andere Kategorien.
+$hybrid-scope: ".category-wissenschaft";
+
+body#{$hybrid-scope} {
+
+  // ---------------------------------------------------------------------------
+  // Topic-List Header: kompakter, weniger "Behoerdentabellen"-Look
+  // ---------------------------------------------------------------------------
+  .topic-list {
+    thead th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary-medium);
+      font-weight: 600;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+    }
+
+    // -------------------------------------------------------------------------
+    // Default Topic-Zeile: dichter, klarere Hierarchie
+    // -------------------------------------------------------------------------
+    .topic-list-item {
+      transition: background-color 0.1s ease;
+
+      td {
+        padding-top: 0.55em;
+        padding-bottom: 0.55em;
+        vertical-align: middle;
+      }
+
+      &:hover {
+        background-color: var(--primary-very-low);
+      }
+
+      // Titel + Tags
+      .main-link {
+        .link-top-line .title {
+          font-size: 0.95rem;
+          font-weight: 500;
+          line-height: 1.35;
+        }
+
+        .link-bottom-line {
+          margin-top: 0.2em;
+        }
+
+        .discourse-tag {
+          font-size: 0.7rem;
+          background: var(--primary-low);
+          color: var(--primary-medium);
+          padding: 0.1em 0.55em;
+          border-radius: 3px;
+          border: none;
+        }
+
+        .topic-excerpt {
+          display: none; // Excerpts brechen die dichte Liste auf
+        }
+      }
+
+      // Sekundaerinfos dezenter
+      .posters,
+      .num.replies,
+      .num.views,
+      .num.age.activity {
+        font-size: 0.82rem;
+        color: var(--primary-medium);
+      }
+
+      // Avatare kleiner
+      .posters a img.avatar {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // Pinned Topics = Featured Cards
+    // -------------------------------------------------------------------------
+    .topic-list-item.pinned {
+      background: var(--tertiary-low);
+      border-left: 3px solid var(--tertiary);
+
+      td {
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+      }
+
+      .main-link {
+        .link-top-line {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 0.6em;
+
+          // "Featured"-Badge vor dem Titel
+          &::before {
+            content: "Featured";
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: var(--tertiary);
+            color: var(--secondary);
+            padding: 0.25em 0.7em;
+            border-radius: 3px;
+            white-space: nowrap;
+          }
+
+          .title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+          }
+        }
+
+        .topic-excerpt {
+          display: block; // Bei Pinned IST Excerpt willkommen
+          margin-top: 0.4em;
+          color: var(--primary-medium);
+          font-size: 0.85rem;
+          line-height: 1.5;
+        }
+
+        .discourse-tag {
+          background: var(--tertiary-medium);
+          color: var(--secondary);
+        }
+      }
+
+      // Pin-Icon in Pinned ausblenden — "Featured"-Badge ersetzt es
+      .topic-statuses .pinned {
+        display: none;
+      }
+
+      &:hover {
+        background: var(--tertiary-low);
+        filter: brightness(1.03);
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // Subkategorie-Boxen: falls Wissenschaft Subkategorien hat
+    // -------------------------------------------------------------------------
+    + .subcategories-with-featured-topics,
+    .subcategory-list {
+      margin-bottom: 1.2em;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Kategorie-Header (das "Wissenschaft"-Label oben): minimal polieren
+  // ---------------------------------------------------------------------------
+  .category-heading {
+    margin-bottom: 0.8em;
+
+    .category-title-contents h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .category-title-description {
+      color: var(--primary-medium);
+      font-size: 0.95rem;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Mobile: Pinned Card Look behalten, aber Badge unter Titel
+  // ---------------------------------------------------------------------------
+  @media (max-width: 767px) {
+    .topic-list .topic-list-item.pinned {
+      border-left-width: 4px;
+
+      .main-link .link-top-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3em;
+
+        &::before {
+          order: 2; // Badge unter Titel
+        }
+
+        .title {
+          order: 1;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+en:
+  theme_metadata:
+    description: "Hybrid category layout: pinned topics rendered as Featured Cards on top, dense topic list below. Scoped to specific categories via CSS."
