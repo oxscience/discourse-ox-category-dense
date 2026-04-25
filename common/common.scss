@@ -14,7 +14,27 @@
 // Scope: body.category-{slug} (Discourse setzt das automatisch).
 // Mehrere Slugs koennen via Komma erweitert werden.
 // Test-Kategorie: health > forschung-evidenz (Slug = forschung-evidenz, ID 7).
-$dense-scope: ".category-forschung-evidenz";
+//
+// DEBUG: zusaetzlich body[class*="category-"] als Wide-Net + sichtbarer Sentinel
+// (pink Banner). Wenn der Sentinel da ist, wissen wir der Selector greift.
+$dense-scope: ".category-forschung-evidenz, .category-health-forschung-evidenz, .category-7";
+
+// SENTINEL: Wenn dieses Banner sichtbar ist, greift die Component.
+body:is(#{$dense-scope})::before {
+  content: "✓ OX Category Dense Layout ist aktiv";
+  display: block;
+  background: #ff4477;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
 
 body:is(#{$dense-scope}) {
 
