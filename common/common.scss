@@ -12,10 +12,11 @@
 // =============================================================================
 
 // Scope: body.category-{slug} (Discourse setzt das automatisch).
-// Jede Regel laeuft unter diesem Praefix — keine Gefahr fuer andere Kategorien.
-$dense-scope: ".category-wissenschaft";
+// Mehrere Slugs koennen via Komma erweitert werden.
+// Test-Kategorie: health > forschung-evidenz (Slug = forschung-evidenz, ID 7).
+$dense-scope: ".category-forschung-evidenz";
 
-body#{$dense-scope} {
+body:is(#{$dense-scope}) {
 
   // ---------------------------------------------------------------------------
   // Topic-List Header: kompakter, weniger "Behoerdentabellen"-Look
